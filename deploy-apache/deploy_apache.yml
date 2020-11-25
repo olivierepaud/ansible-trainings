@@ -1,0 +1,19 @@
+---
+  - name: "deploy apache"
+    hosts: server1
+
+
+    tasks:
+      - name: "sudo apt update"
+        command: sudo apt update
+
+      - name: "install apache sale"
+        command: sudo apt install apache2 -y
+        notify: restart server
+
+    handlers:
+
+      - name: restart server
+        debug:
+          msg: "CALLED HANDLER FOR RESTART"
+

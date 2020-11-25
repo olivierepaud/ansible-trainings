@@ -1,0 +1,14 @@
+---
+  - name: "execute cmds remote"
+    hosts: server1
+
+
+    tasks:
+      - name: "execute uname -a"
+        command: uname -a
+
+      - name: "execute ifconfig -a"
+        command: "ifconfig enp0s8"
+
+      - name: "execute cat toto"
+        command: cat ~/toto
