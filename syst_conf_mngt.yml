@@ -1,0 +1,18 @@
+---
+  - name: "NTP configuration"
+    hosts: localhost
+    become: yes
+
+    tasks:
+
+      - name: "ensure NTP is installed"
+        apt:
+          name: 
+            - ntp
+          state: present
+
+      - name: "ensure NTP is started at boot"
+        service: 
+          name: ntp
+          state: started
+          enabled: yes
