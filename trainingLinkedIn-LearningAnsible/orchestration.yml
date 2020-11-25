@@ -1,7 +1,7 @@
 ---
   - name: "orchestration example"
-    hosts: logicservers
-    #hosts: east
+    #hosts: logicservers
+    hosts: east
     serial: 1
 
     tasks:
