@@ -1,0 +1,83 @@
+---
+- hosts: all:&odd
+  tasks: 
+  - name: create distant directory
+    file: 
+      dest: /tmp/ansible
+      state: directory
+    tags:
+      - init
+
+  - name: create distant file
+    file: 
+      dest: /tmp/ansible/ansible
+      state: touch
+    tags:
+      - init
+
+- hosts: all:&odd
+  tasks:
+  - name: create a file on all remote machines
+    file:
+      dest: /tmp/ansible/file
+      state: '{{file_state}}'
+    tags:
+      - install
+
+- hosts: database:&odd
+  tasks:
+  - name: create a file on the database machines
+    file:
+      dest: /tmp/ansible/dbfile
+      state: '{{file_state}}'
+    tags:
+      - install
+
+- hosts: backend:!even
+  tasks:
+  - name: create a file on the back-end machines
+    file:
+      dest: /tmp/ansible/befile
+      state: '{{file_state}}'
+    tags:
+      - install
+
+- hosts: frontend:!even
+  tasks:
+  - name: create a file on the front-end machines
+    file:
+      dest: /tmp/ansible/fefile
+      state: '{{file_state}}'
+    tags:
+      - install
+
+- hosts: all:&backup:!even:!database
+  tasks:
+  - name: "create a file on: all:&backup:!even:!database = fe01"
+    file:
+      dest: /tmp/ansible/fe01file
+      state: '{{file_state}}'
+    tags:
+      - install
+
+- hosts: backup:&odd
+  tasks:
+  - name: create a file on the backup machines
+    file:
+      dest: /tmp/ansible/backupfile
+      state: '{{file_state}}'
+    tags:
+      - install
+      - backup
+
+- hosts: be01
+  tasks:
+  - name: create a file on be01
+    file:
+      dest: /tmp/ansible/be01file
+      state: '{{file_state}}'
+    tags:
+      - install
+      - optionnal
+
+

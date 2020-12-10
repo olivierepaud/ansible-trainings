@@ -1,0 +1,17 @@
+---
+- hosts: all:&odd
+  tasks: 
+
+  - name: create distant directory
+    file: 
+      dest: /tmp/ansible
+      state: directory
+    tags:
+      - init
+
+  - name: create distant file
+    file: 
+      dest: /tmp/ansible/ansible
+      state: touch
+    tags:
+      - init

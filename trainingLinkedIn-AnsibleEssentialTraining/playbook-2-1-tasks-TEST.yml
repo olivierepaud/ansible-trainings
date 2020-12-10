@@ -1,0 +1,18 @@
+---
+- hosts: all:&odd
+  tasks: 
+  - name: create distant directory
+    file: 
+      dest: /tmp/ansible
+      state: directory
+    tags:
+      - just-this-task
+
+- hosts: be01
+  tasks:
+  - name: create a file on a remote machine
+    file:
+      dest: /tmp/ansible/file
+      state: '{{file_state}}'
+    tags:
+      - skip-this-task
