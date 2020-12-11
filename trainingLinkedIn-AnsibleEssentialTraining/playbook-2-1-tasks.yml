@@ -1,30 +1,24 @@
 ---
-- hosts: all:&odd
+- name: INIT TASKS FOR ALL MACHINES
+  hosts: all:&odd
   tasks: 
-  - name: create distant directory
+  - name: create remote directory
     file: 
       dest: /tmp/ansible
       state: directory
     tags:
       - init
 
-  - name: create distant file
-    file: 
+  - name: create a file on all remote machines
+    file:
       dest: /tmp/ansible/ansible
-      state: touch
+      state: '{{file_state}}'
     tags:
       - init
 
-- hosts: all:&odd
-  tasks:
-  - name: create a file on all remote machines
-    file:
-      dest: /tmp/ansible/file
-      state: '{{file_state}}'
-    tags:
-      - install
 
-- hosts: database:&odd
+- name: PLAY FOR DATABASE MACHINES
+  hosts: database:&odd
   tasks:
   - name: create a file on the database machines
     file:
@@ -33,7 +27,9 @@
     tags:
       - install
 
-- hosts: backend:!even
+
+- name: PLAY FOR BACKEND MACHINES
+  hosts: backend:!even
   tasks:
   - name: create a file on the back-end machines
     file:
@@ -42,7 +38,9 @@
     tags:
       - install
 
-- hosts: frontend:!even
+
+- name: PLAY FOR FRONTEND MACHINES
+  hosts: frontend:!even
   tasks:
   - name: create a file on the front-end machines
     file:
@@ -51,16 +49,20 @@
     tags:
       - install
 
-- hosts: all:&backup:!even:!database
+
+- name: WEIRD PLAY 
+  hosts: all:&backup:!even:!database
   tasks:
   - name: "create a file on: all:&backup:!even:!database = fe01"
     file:
-      dest: /tmp/ansible/fe01file
+      dest: /tmp/ansible/weirdfile
       state: '{{file_state}}'
     tags:
       - install
 
-- hosts: backup:&odd
+
+- name: BACKUP PLAY
+  hosts: backup:&odd
   tasks:
   - name: create a file on the backup machines
     file:
@@ -70,7 +72,9 @@
       - install
       - backup
 
-- hosts: be01
+
+- name: PLAY JUST FOR BE01
+  hosts: be01
   tasks:
   - name: create a file on be01
     file:
