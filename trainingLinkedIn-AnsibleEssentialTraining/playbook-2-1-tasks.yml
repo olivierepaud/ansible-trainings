@@ -82,6 +82,6 @@
       state: '{{file_state}}'
     tags:
       - install
-      - optionnal
+      - optional
 
 
