@@ -83,3 +83,11 @@
     tags:
       - install
       - optional
+  - name: create another file on be01
+    file:
+      dest: '{{another_file}}'
+      state: '{{file_state}}'
+      #      when: another_file is defined
+    tags:
+      - install
+      - optional
