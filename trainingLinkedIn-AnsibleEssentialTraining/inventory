@@ -6,17 +6,32 @@ be02 ansible_host=192.168.33.23 ansible_connection=ssh
 fe01 ansible_host=192.168.33.24 ansible_connection=ssh
 fe02 ansible_host=192.168.33.25 ansible_connection=ssh
 
+[all:vars]
+dest_rep=/tmp/ansible
+dest_file=/tmp/ansible/ansible
+weird_file=/tmp/ansible/weiiiiiiiiiiiiiiiiiiiiird
+another_file=/tmp/ansible/another_file
+
 [database]
 db01
 db02
+
+[database:vars]
+db_file=/tmp/ansible/dbfile
 
 [backend]
 be01
 be02
 
+[backend:vars]
+be_file=/tmp/ansible/befile
+
 [frontend]
 fe01
 fe02
+
+[frontend:vars]
+fe_file=/tmp/ansible/fefile
 
 [odd]
 db01
@@ -31,3 +46,6 @@ fe02
 [backup]
 db01
 fe01
+
+[backup:vars]
+backup_file=/tmp/ansible/backupfile

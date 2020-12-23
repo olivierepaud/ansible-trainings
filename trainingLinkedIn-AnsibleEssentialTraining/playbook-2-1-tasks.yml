@@ -4,14 +4,14 @@
   tasks: 
   - name: create remote directory
     file: 
-      dest: /tmp/ansible
+      dest: '{{dest_rep}}'
       state: directory
     tags:
       - init
 
   - name: create a file on all remote machines
     file:
-      dest: /tmp/ansible/ansible
+      dest: '{{dest_file}}'
       state: '{{file_state}}'
     tags:
       - init
@@ -22,7 +22,7 @@
   tasks:
   - name: create a file on the database machines
     file:
-      dest: /tmp/ansible/dbfile
+      dest: '{{db_file}}'
       state: '{{file_state}}'
     tags:
       - install
@@ -33,7 +33,7 @@
   tasks:
   - name: create a file on the back-end machines
     file:
-      dest: /tmp/ansible/befile
+      dest: '{{be_file}}'
       state: '{{file_state}}'
     tags:
       - install
@@ -44,7 +44,7 @@
   tasks:
   - name: create a file on the front-end machines
     file:
-      dest: /tmp/ansible/fefile
+      dest: '{{fe_file}}'
       state: '{{file_state}}'
     tags:
       - install
@@ -55,7 +55,7 @@
   tasks:
   - name: "create a file on: all:&backup:!even:!database = fe01"
     file:
-      dest: /tmp/ansible/weirdfile
+      dest: '{{weird_file}}'
       state: '{{file_state}}'
     tags:
       - install
@@ -66,7 +66,7 @@
   tasks:
   - name: create a file on the backup machines
     file:
-      dest: /tmp/ansible/backupfile
+      dest: '{{backup_file}}'
       state: '{{file_state}}'
     tags:
       - install
@@ -83,5 +83,3 @@
     tags:
       - install
       - optional
-
-
