@@ -11,10 +11,11 @@
 
   - name: create a file on all remote machines
     file:
-      dest: '{{dest_file}}'
+      dest: '{{all_file}}'
       state: '{{file_state}}'
     tags:
       - init
+      - justThis
 
 
 - name: PLAY FOR DATABASE MACHINES
@@ -76,13 +77,22 @@
 - name: PLAY JUST FOR BE01
   hosts: be01
   tasks:
-  - name: create a file on be01
+  - name: create a static file on be01
     file:
-      dest: /tmp/ansible/be01file
+      dest: /tmp/ansible/static-file
       state: '{{file_state}}'
     tags:
       - install
       - optional
+      - justThis
+  - name: create a file on be01
+    file:
+      dest: '{{be01_file}}'
+      state: '{{file_state}}'
+    tags:
+      - install
+      - optional
+      - justThis
   - name: create another file on be01
     file:
       dest: '{{another_file}}'

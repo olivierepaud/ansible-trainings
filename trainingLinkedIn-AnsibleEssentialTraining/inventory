@@ -8,7 +8,7 @@ fe02 ansible_host=192.168.33.25 ansible_connection=ssh
 
 [all:vars]
 dest_rep=/tmp/ansible
-dest_file=/tmp/ansible/ansible
+dest_file=/tmp/ansible/dest-file
 weird_file=/tmp/ansible/weiiiiiiiiiiiiiiiiiiiiird
 another_file=/tmp/ansible/another_file
 
