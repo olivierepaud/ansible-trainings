@@ -101,3 +101,21 @@
     tags:
       - install
       - optional
+
+
+- name: USING TEMPLATES
+  hosts: all:&odd
+  tasks:
+  - name: deploy a simple template file
+    template:
+      src: templates/template.j2
+      dest: '{{dest_rep}}/template.txt'
+    tags:
+      - create
+  - name: destroy the templated file
+    file:
+      dest: '{{dest_rep}}/template.txt'
+      state: absent
+    tags:
+      - destroy
+
