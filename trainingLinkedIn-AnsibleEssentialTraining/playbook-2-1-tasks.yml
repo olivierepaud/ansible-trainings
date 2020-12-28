@@ -15,7 +15,6 @@
       state: '{{file_state}}'
     tags:
       - init
-      - justThis
 
 
 - name: PLAY FOR DATABASE MACHINES
@@ -84,7 +83,6 @@
     tags:
       - install
       - optional
-      - justThis
   - name: create a file on be01
     file:
       dest: '{{be01_file}}'
@@ -92,7 +90,6 @@
     tags:
       - install
       - optional
-      - justThis
   - name: create another file on be01
     file:
       dest: '{{another_file}}'
@@ -119,3 +116,21 @@
     tags:
       - destroy
 
+
+- name: USING HOSTVARS FOR CONDITIONAL TASK
+  hosts: all:&odd
+  tasks:
+    - name: create a file if hostname is fe01
+      file:
+        dest: '{{dest_rep}}/I_am_on_fe01.txt'
+        state: '{{file_state}}'
+      when: hostvars[inventory_hostname]['inventory_hostname'] == 'fe01'
+      tags:
+        - justThis
+    - name: create a file if hostname is be01
+      file: 
+        dest: '{{dest_rep}}/I_am_on_be01.txt'
+        state: '{{file_state}}'
+      when: inventory_hostname == 'be01'
+      tags:
+        - justThis
