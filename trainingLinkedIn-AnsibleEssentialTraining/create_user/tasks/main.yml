@@ -1,0 +1,10 @@
+---
+# tasks file for create_user
+- name: create remote user
+  user: 
+    name: '{{user_name}}'
+    state: '{{user_state}}'
+    shell: '{{default_shell}}'
+    groups: sudo
+    append: yes
+    create_home: yes
