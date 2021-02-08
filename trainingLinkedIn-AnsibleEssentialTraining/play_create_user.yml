@@ -1,11 +1,13 @@
 ---
 - name: CREATE A USER 
-  hosts: be01
+  hosts: fe01
   tasks:
     - include_role:
         name: create_user
       vars:
           user_name: olivier
           user_state: present
-          #ssh_key: ~/.ssh/id_key.pub
+          pub_key: '{{local_pub_key}}'
+            #ssh_key: ~/.ssh/id_key.pub
   become: yes
+
