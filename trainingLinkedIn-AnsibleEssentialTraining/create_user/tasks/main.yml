@@ -8,3 +8,9 @@
     groups: sudo
     append: yes
     create_home: yes
+
+- name: remove user folder
+  file:
+    path: '/home/{{user_name}}'
+    state: '{{user_state}}'
+  when: user_state == "absent"
