@@ -8,6 +8,17 @@
     groups: sudo
     append: yes
     create_home: yes
+      #  tags:
+      #    - create
+
+      #- name: generate ssh-key
+      #  command: ssh-keygen -t rsa
+
+- name: copy local public key remotely
+  authorized_key:
+    user: '{{user_name}}'
+    state: '{{user_state}}'
+    key: '{{local_pub_key}}'
 
 - name: remove user folder
   file:
