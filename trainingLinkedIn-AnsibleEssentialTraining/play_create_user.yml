@@ -6,7 +6,7 @@
         name: create_user
       vars:
           user_name: olivier
-          user_state: present
+          user_state: '{{user_state}}'
           pub_key: '{{local_pub_key}}'
             #ssh_key: ~/.ssh/id_key.pub
   become: yes
