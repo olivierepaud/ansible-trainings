@@ -19,6 +19,7 @@
     user: '{{user_name}}'
     state: '{{user_state}}'
     key: '{{local_pub_key}}'
+  when: user_state == "present"
 
 - name: remove user folder
   file:
