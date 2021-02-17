@@ -1,4 +1,3 @@
 ---
 all_file: /tmp/ansible/all-file
 local_pub_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVwz+278XbgqUdOCR0c8LlNH0yCTbGcInScOvv7DuzI olivierepaud"
-
