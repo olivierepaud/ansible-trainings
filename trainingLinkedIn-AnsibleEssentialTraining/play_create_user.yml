@@ -10,7 +10,7 @@
       vars:
           user_name: '{{my_install_user}}'
           user_state: '{{user_state}}'
-          ssh_key: '{{local_pub_key}}'
+          ssh_key: '{{my_local_pub_key}}'
   become: yes
 
 - name: POPULATE USER ACCOUNT
