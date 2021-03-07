@@ -2,7 +2,7 @@
 all_file: /tmp/ansible/all-file
 local_pub_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVwz+278XbgqUdOCR0c8LlNH0yCTbGcInScOvv7DuzI olivierepaud"
 
-install_user: olivier
+my_install_user: olivier
 my_src_file: "/home/vagrant/GIT/ansible-test/trainingLinkedIn-AnsibleEssentialTraining/src/ansible-server.Vagrantfile"
 my_dest_dir: "/home/olivier/dst/"
 my_default_mode: '644'
