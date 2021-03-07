@@ -4,10 +4,32 @@
   tasks:
     - include_role:
         name: create_user
+        apply:
+          tags:
+            - install
       vars:
           user_name: olivier
           user_state: '{{user_state}}'
-          pub_key: '{{local_pub_key}}'
-            #ssh_key: ~/.ssh/id_key.pub
+          ssh_key: '{{local_pub_key}}'
   become: yes
 
+- name: POPULATE USER ACCOUNT
+  hosts: fe01
+  tasks:
+    - name: create destination folder
+      file:
+        path: '{{my_dest_dir}}'
+        state: directory
+      tags:
+        - init
+
+    - name: copy files
+      copy: 
+        src: '{{my_src_file}}'
+        dest: '{{my_dest_dir}}'
+        owner: '{{install_user}}'
+        group: '{{install_user}}'
+        mode: '{{my_default_mode}}'
+      tags:
+        - init
+  become: yes
