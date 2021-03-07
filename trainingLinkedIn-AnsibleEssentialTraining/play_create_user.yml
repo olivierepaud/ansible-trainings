@@ -8,7 +8,7 @@
           tags:
             - install
       vars:
-          user_name: olivier
+          user_name: '{{my_install_user}}'
           user_state: '{{user_state}}'
           ssh_key: '{{local_pub_key}}'
   become: yes
@@ -22,14 +22,17 @@
         state: directory
       tags:
         - init
+      when: user_state == "present"
 
     - name: copy files
       copy: 
         src: '{{my_src_file}}'
         dest: '{{my_dest_dir}}'
-        owner: '{{install_user}}'
-        group: '{{install_user}}'
+        owner: '{{my_install_user}}'
+        group: '{{my_install_user}}'
         mode: '{{my_default_mode}}'
       tags:
         - init
+      when: user_state == "present"
+
   become: yes
