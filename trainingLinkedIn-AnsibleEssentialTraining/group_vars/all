@@ -1,8 +1,11 @@
 ---
-my_file_for_all: /tmp/ansible/file-for-all
-my_install_user: olivier
+#local variables
 my_local_ssh_pubkey_file: "/home/vagrant/.ssh/id_ed25519.pub"
 my_local_pub_key: "{{lookup('file', '{{my_local_ssh_pubkey_file}}')}}"
-my_src_file: "/home/vagrant/GIT/ansible-test/trainingLinkedIn-AnsibleEssentialTraining/src/ansible-server.Vagrantfile"
+my_local_src_file: "/home/vagrant/GIT/ansible-test/trainingLinkedIn-AnsibleEssentialTraining/src/ansible-server.Vagrantfile"
+
+#remote variables
+my_file_for_all: /tmp/ansible/file-for-all
+my_install_user: olivier
 my_dest_dir: "/home/olivier/dst/"
 my_default_mode: '644'
