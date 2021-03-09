@@ -26,7 +26,7 @@
 
     - name: copy files
       copy: 
-        src: '{{my_src_file}}'
+        src: '{{my_local_src_file}}'
         dest: '{{my_dest_dir}}'
         owner: '{{my_install_user}}'
         group: '{{my_install_user}}'
