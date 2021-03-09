@@ -1,6 +1,6 @@
 ---
 - name: INIT TASKS FOR ALL MACHINES
-  hosts: all:&odd
+  hosts: all:&odd:fe01
   tasks: 
   - name: create remote directory
     file: 
@@ -11,7 +11,7 @@
 
   - name: create a file on all remote machines
     file:
-      dest: '{{all_file}}'
+      dest: '{{my_file_for_all}}'
       state: '{{file_state}}'
     tags:
       - init
