@@ -1,6 +1,7 @@
 ---
 - name: CREATE A USER 
   hosts: fe01
+  become: yes
   tasks:
     - include_role:
         name: create_user
@@ -11,10 +12,10 @@
           user_name: '{{my_install_user}}'
           user_state: '{{user_state}}'
           ssh_key: '{{my_local_pub_key}}'
-  become: yes
 
 - name: POPULATE USER ACCOUNT
   hosts: fe01
+  become: yes
   tasks:
     - name: create destination folder
       file:
@@ -35,4 +36,3 @@
         - init
       when: user_state == "present"
 
-  become: yes
