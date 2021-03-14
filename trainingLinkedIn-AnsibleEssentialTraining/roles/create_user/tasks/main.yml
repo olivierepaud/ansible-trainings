@@ -1,0 +1,23 @@
+---
+# tasks file for create_user
+- name: ensure remote user is {{user_state}}
+  user: 
+    name: '{{user_name}}'
+    state: '{{user_state}}'
+    shell: '{{default_shell}}'
+    groups: sudo
+    append: yes
+    create_home: yes
+
+- name: ensure local public key is remotely added to authorized_key file
+  authorized_key:
+    user: '{{user_name}}'
+    state: '{{user_state}}'
+    key: '{{ssh_key}}'
+  when: user_state == "present"
+
+- name: ensure remote user folder is removed
+  file:
+    path: '/home/{{user_name}}'
+    state: '{{user_state}}'
+  when: user_state == "absent"
