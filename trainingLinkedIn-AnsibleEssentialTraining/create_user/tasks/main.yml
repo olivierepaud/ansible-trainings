@@ -1,6 +1,6 @@
 ---
 # tasks file for create_user
-- name: create remote user
+- name: ensure remote user is {{user_state}}
   user: 
     name: '{{user_name}}'
     state: '{{user_state}}'
@@ -9,14 +9,14 @@
     append: yes
     create_home: yes
 
-- name: copy local public key remotely
+- name: ensure local public key is remotely added to authorized_key file
   authorized_key:
     user: '{{user_name}}'
     state: '{{user_state}}'
     key: '{{ssh_key}}'
   when: user_state == "present"
 
-- name: remove user folder
+- name: ensure remote user folder is removed
   file:
     path: '/home/{{user_name}}'
     state: '{{user_state}}'
