@@ -1,0 +1,37 @@
+---
+- name: CREATE A USER 
+  hosts: fe01
+  become: yes
+  tasks:
+    - include_role:
+        name: create_user
+        apply:
+          tags:
+            - install
+      vars:
+          user_name: '{{my_install_user}}'
+          user_state: '{{user_state}}'
+          ssh_key: '{{my_local_pub_key}}'
+
+- name: POPULATE USER ACCOUNT
+  hosts: fe01
+  become: yes
+  tasks:
+    - name: ensure destination folder is created
+      file:
+        path: '{{my_dest_dir}}'
+        state: directory
+      tags:
+        - init
+      when: user_state == "present"
+
+    - name: ensure init files are copied to the destination folder
+      copy: 
+        src: '{{my_local_src_file}}'
+        dest: '{{my_dest_dir}}'
+        owner: '{{my_install_user}}'
+        group: '{{my_install_user}}'
+        mode: '{{my_default_mode}}'
+      tags:
+        - init
+      when: user_state == "present"
