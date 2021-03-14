@@ -1,5 +1,5 @@
 ---
-- name: CREATE A USER 
+- name: MANAGE THE REMOTE USER
   hosts: fe01
   become: yes
   tasks:
